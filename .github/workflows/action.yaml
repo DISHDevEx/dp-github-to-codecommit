@@ -16,9 +16,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '17'
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -36,4 +33,3 @@ jobs:
            python --version
            git remote add codecommit codecommit::us-east-1://dp-github-to-codecommit
            git push codecommit HEAD:main
-
