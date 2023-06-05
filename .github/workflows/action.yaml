@@ -12,6 +12,7 @@ jobs:
   Pytest:
     runs-on: ubuntu-latest
     steps:
+      - name: github sync
       - uses: actions/checkout@v3
         with:
           persist-credentials: false
