@@ -31,7 +31,7 @@ jobs:
       - name: Push to Codecommit
         run: |
            python --version
-           git clone --mirror git@github.com:DISHDevEx/dp-github-to-codecommit.git
+           git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
            cd dp-github-to-codecommit.git
            git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo --all
 #           git remote add codecommit codecommit::us-east-1://test-repo
