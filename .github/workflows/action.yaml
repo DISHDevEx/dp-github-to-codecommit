@@ -23,14 +23,15 @@ jobs:
           role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
           aws-region: ${{ secrets.AWS_REGION }}
       # Upload a file to AWS s3
-#      - name: Install dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install git-remote-codecommit
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install git-remote-codecommit
+
       - name: Push to Codecommit
         run: |
            python --version
-#           git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
+           git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
            cd dp-github-to-codecommit.git
            git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo --all
 #           git remote add codecommit codecommit::us-east-1://test-repo
