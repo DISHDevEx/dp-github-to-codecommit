@@ -33,4 +33,3 @@ jobs:
            python --version
            git remote add codecommit codecommit::us-east-1://test-repo
            git push codecommit HEAD:main
-           
