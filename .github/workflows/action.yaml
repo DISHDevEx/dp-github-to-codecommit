@@ -31,9 +31,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install git-remote-codecommit
 
-      - name: 
+      - name: Push to Codecommit
         run: |
            python --version
-           aws s3 cp ./index1.html s3://${{ secrets.BUCKET_NAME }}/
+           git remote add codecommit codecommit::us-east-1://dp-github-to-codecommit
+           git push codecommit HEAD:main
 
-           
