@@ -1,0 +1,37 @@
+name: sync up to codecommit
+
+on:
+  pull_request:
+    branches: [main]
+env:
+  AWS_REGION : ${{ secrets.AWS_REGION }}
+# permission can be added at job level or workflow level
+permissions:
+      id-token: write   # This is required for requesting the JWT
+      contents: read    # This is required for actions/checkout
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: configure aws credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+            role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
+            aws-region: ${{ secrets.AWS_REGION }}
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1.0.3
+#        with:
+#          aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+#          aws-region: us-east-1
+s
+      - name: Sync up to CodeCommit
+        uses: tsgit18/sync-up-to-codecommit-action@v1
+        with:
+          repository_name: test_repo
+          aws_region: us-east-1
