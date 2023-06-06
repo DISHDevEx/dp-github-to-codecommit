@@ -37,7 +37,10 @@ jobs:
           ls
       - name: Install dependencies
         run: |
-          git config --global credential.'https://git-codecommit.*.amazonaws.com'.helper '!aws codecommit credential-helper $@'
-          git config --global credential.UseHttpPath true
-          git remote add sync https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo
-          git push sync --mirror
+          git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
+          cd dp-github-to-codecommit.git
+          git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo --all
+#          git config --global credential.'https://git-codecommit.*.amazonaws.com'.helper '!aws codecommit credential-helper $@'
+#          git config --global credential.UseHttpPath true
+#          git remote add sync https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo
+#          git push sync --mirror
