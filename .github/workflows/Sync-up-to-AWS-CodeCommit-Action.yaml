@@ -29,6 +29,9 @@ jobs:
           aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
+      - name: list
+        run: |
+          git config --global --add safe.directory /github/workspace
       - name: debug
         run: |
           ls
