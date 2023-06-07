@@ -14,29 +14,28 @@ permissions:
 jobs:
   if_merged:
     if: github.event.pull_request.merged == true
-    sync:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: 0
-        - name: configure aws credentials
-          uses: aws-actions/configure-aws-credentials@v1
-          with:
-            role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
-            role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
-            aws-region: ${{ secrets.AWS_REGION }}
-        - name: setting safe dir
-          run: |
-            git config --global --add safe.directory /github/workspace
-        - name: Install dependencies
-          run: |
-            git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
-            cd dp-github-to-codecommit.git
-            git config --global credential.'https://git-codecommit.*.amazonaws.com'.helper '!aws codecommit credential-helper $@'
-            git config --global credential.UseHttpPath true
-            git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo --all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.ROLE_TO_ASSUME }}
+          role-session-name: ${{ secrets.SAMPLE_ROLE_SESSION }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: setting safe dir
+        run: |
+          git config --global --add safe.directory /github/workspace
+      - name: Install dependencies
+        run: |
+          git clone --mirror https://github.com/DISHDevEx/dp-github-to-codecommit.git
+          cd dp-github-to-codecommit.git
+          git config --global credential.'https://git-codecommit.*.amazonaws.com'.helper '!aws codecommit credential-helper $@'
+          git config --global credential.UseHttpPath true
+          git push https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo --all
 
   #          git remote add sync https://git-codecommit.us-east-1.amazonaws.com/v1/repos/test-repo
   #          git push sync --mirror
